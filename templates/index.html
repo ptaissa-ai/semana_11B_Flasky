@@ -13,9 +13,9 @@ Cadastro de usuários - Semana 11.B
     </h2>
 
     <p>
-        Cadastre um usuário, escolha sua função e
-        decida se o e-mail também deverá ser enviado
-        para flaskaulasweb@zohomail.com.
+        Cadastre um usuário e escolha se o e-mail
+        também deverá ser enviado para
+        flaskaulasweb@zohomail.com.
     </p>
 
 </section>
@@ -75,35 +75,6 @@ Cadastro de usuários - Semana 11.B
                 required
                 autocomplete="off"
             >
-
-        </div>
-
-
-        <div class="campo">
-
-            <label for="role_id">
-                Função
-            </label>
-
-            <select
-                id="role_id"
-                name="role_id"
-                required
-            >
-
-                <option value="">
-                    Selecione
-                </option>
-
-                {% for role in roles %}
-
-                    <option value="{{ role.id }}">
-                        {{ role.name }}
-                    </option>
-
-                {% endfor %}
-
-            </select>
 
         </div>
 
