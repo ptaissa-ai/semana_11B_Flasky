@@ -186,15 +186,11 @@ def send_email(to, subject, template, **kwargs):
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    roles = Role.query.order_by(Role.id).all()
-
     if request.method == "POST":
         username = request.form.get(
             "username",
             "",
         ).strip()
-
-        role_id = request.form.get("role_id")
 
         enviar_professor = (
             request.form.get("enviar_professor")
@@ -208,30 +204,13 @@ def index():
             )
             return redirect(url_for("index"))
 
-        if not role_id:
-            flash(
-                "Selecione uma função.",
-                "danger",
-            )
-            return redirect(url_for("index"))
-
-        try:
-            role_id_int = int(role_id)
-        except ValueError:
-            flash(
-                "Função inválida.",
-                "danger",
-            )
-            return redirect(url_for("index"))
-
-        role = db.session.get(
-            Role,
-            role_id_int,
-        )
+        role = Role.query.filter_by(
+            name="User"
+        ).first()
 
         if role is None:
             flash(
-                "Função inválida.",
+                "A função User não foi encontrada.",
                 "danger",
             )
             return redirect(url_for("index"))
@@ -338,7 +317,6 @@ def index():
 
     return render_template(
         "index.html",
-        roles=roles,
         users=users,
         total_users=User.query.count(),
         total_roles=Role.query.count(),
