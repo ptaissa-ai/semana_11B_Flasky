@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block title %}E-mails enviados - Semana 11.B{% endblock %}
+
+{% block content %}
+<section class="hero">
+    <h2>E-mails enviados</h2>
+    <p>
+        Todos os envios aceitos pela API do SendGrid são persistidos
+        no banco de dados e listados nesta página.
+    </p>
+</section>
+
+<section class="painel">
+    {% if emails %}
+        <div class="tabela-container">
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Destinatário</th>
+                        <th>Assunto</th>
+                        <th>Prontuário</th>
+                        <th>Nome do aluno</th>
+                        <th>Usuário</th>
+                        <th>Data do envio</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for email in emails %}
+                        <tr>
+                            <td>{{ email.id }}</td>
+                            <td>{{ email.destinatario }}</td>
+                            <td>{{ email.assunto }}</td>
+                            <td>{{ email.prontuario }}</td>
+                            <td>{{ email.nome_aluno }}</td>
+                            <td>{{ email.usuario }}</td>
+                            <td>
+                                {{ email.data_envio.strftime('%d/%m/%Y %H:%M:%S') }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    {% else %}
+        <p>Nenhum e-mail foi enviado até o momento.</p>
+    {% endif %}
+
+    <p class="acoes">
+        <a class="link-botao" href="{{ url_for('index') }}">
+            Voltar ao cadastro
+        </a>
+    </p>
+</section>
+{% endblock %}
