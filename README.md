@@ -5,7 +5,6 @@ Aplicação desenvolvida para a atividade **Semana 11.B**, utilizando Flask, Fla
 ## Funcionalidades
 
 - Cadastro de usuários.
-- Funções Administrator, Moderator e User.
 - Envio automático para o e-mail institucional da aluna.
 - Opção de envio também para `flaskaulasweb@zohomail.com`.
 - Corpo do e-mail com prontuário, nome da aluna, usuário cadastrado e função.
@@ -31,4 +30,4 @@ python app.py
 
 Crie o arquivo `.env` a partir do `.env.example` e informe a chave real do SendGrid.
 
-**Não envie a API Key real para o GitHub.**
+
