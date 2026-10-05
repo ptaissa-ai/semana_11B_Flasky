@@ -4,34 +4,61 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% block title %}Semana 11.B - Flask{% endblock %}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
 </head>
 <body>
+
     <header class="topo">
         <div class="container topo-conteudo">
+
             <div>
                 <h1>Semana 11.B</h1>
-                <p>Flask + e-mail + banco de dados</p>
+                <p>
+                    Flask + e-mail + banco de dados
+                </p>
             </div>
+
             <nav>
-                <a href="{{ url_for('index') }}">Início</a>
-                <a href="{{ url_for('emails_enviados') }}">E-mails enviados</a>
+                <a href="{{ url_for('index') }}">
+                    Início
+                </a>
+
+                <a href="{{ url_for('emails_enviados') }}">
+                    E-mails enviados
+                </a>
             </nav>
+
         </div>
     </header>
 
     <main class="container">
+
         {% with messages = get_flashed_messages(with_categories=true) %}
+
             {% if messages %}
+
                 <section class="mensagens">
+
                     {% for category, message in messages %}
-                        <div class="alert {{ category }}">{{ message }}</div>
+
+                        <div class="alert {{ category }}">
+                            {{ message }}
+                        </div>
+
                     {% endfor %}
+
                 </section>
+
             {% endif %}
+
         {% endwith %}
 
         {% block content %}{% endblock %}
+
     </main>
+
 </body>
 </html>

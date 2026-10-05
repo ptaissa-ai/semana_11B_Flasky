@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+
+{% block title %}
+Cadastro de usuários - Semana 11.B
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+
+    <h2>
+        Cadastro de usuários
+    </h2>
+
+    <p>
+        Cadastre um usuário, escolha sua função e
+        decida se o e-mail também deverá ser enviado
+        para flaskaulasweb@zohomail.com.
+    </p>
+
+</section>
+
+
+<section class="cards">
+
+    <article class="card">
+        <strong>
+            {{ total_users }}
+        </strong>
+        <span>
+            Usuários
+        </span>
+    </article>
+
+    <article class="card">
+        <strong>
+            {{ total_roles }}
+        </strong>
+        <span>
+            Funções
+        </span>
+    </article>
+
+    <article class="card">
+        <strong>
+            {{ total_emails }}
+        </strong>
+        <span>
+            E-mails persistidos
+        </span>
+    </article>
+
+</section>
+
+
+<section class="painel">
+
+    <h3>
+        Novo usuário
+    </h3>
+
+    <form method="POST">
+
+        <div class="campo">
+
+            <label for="username">
+                Nome do usuário
+            </label>
+
+            <input
+                type="text"
+                id="username"
+                name="username"
+                maxlength="80"
+                required
+                autocomplete="off"
+            >
+
+        </div>
+
+
+        <div class="campo">
+
+            <label for="role_id">
+                Função
+            </label>
+
+            <select
+                id="role_id"
+                name="role_id"
+                required
+            >
+
+                <option value="">
+                    Selecione
+                </option>
+
+                {% for role in roles %}
+
+                    <option value="{{ role.id }}">
+                        {{ role.name }}
+                    </option>
+
+                {% endfor %}
+
+            </select>
+
+        </div>
+
+
+        <label class="checkbox">
+
+            <input
+                type="checkbox"
+                name="enviar_professor"
+            >
+
+            <span>
+                Enviar também para
+                <strong>
+                    flaskaulasweb@zohomail.com
+                </strong>
+            </span>
+
+        </label>
+
+
+        <button type="submit">
+            Cadastrar usuário
+        </button>
+
+    </form>
+
+</section>
+
+
+<section class="painel">
+
+    <div class="titulo-linha">
+
+        <h3>
+            Usuários cadastrados
+        </h3>
+
+        <a
+            class="link-botao"
+            href="{{ url_for('emails_enviados') }}"
+        >
+            Ver e-mails enviados
+        </a>
+
+    </div>
+
+
+    {% if users %}
+
+        <div class="tabela-container">
+
+            <table>
+
+                <thead>
+
+                    <tr>
+                        <th>ID</th>
+                        <th>Usuário</th>
+                        <th>Função</th>
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    {% for user in users %}
+
+                        <tr>
+                            <td>
+                                {{ user.id }}
+                            </td>
+
+                            <td>
+                                {{ user.username }}
+                            </td>
+
+                            <td>
+                                {{ user.role.name }}
+                            </td>
+                        </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    {% else %}
+
+        <p>
+            Nenhum usuário cadastrado ainda.
+        </p>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}
